@@ -110,6 +110,6 @@ batch_size = 256
 train_iter, test_iter = load_data_fashion_mnist(batch_size=batch_size)
 lr, num_epochs = 0.001, 5
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
-train_leNet(net, train_iter, test_iter, batch_size, optimizer, device=device, num_epochs)
+train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
 
 
