@@ -33,10 +33,12 @@ def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.i
     for X, y in data_iter:
         # 验证模式, 放弃 dropOut
         net.eval()
-        acc_sum += (net(X.to(device)).argmax(dim=1) == y.to(device)).float().sum().cpu.item()
+        acc_sum += (net(X.to(device)).argmax(dim=1) == y.to(device)).float().sum().cpu().item()
         # 改为训练模式
         net.train()
         n += y.shape[0]
+        print('acc_sum: ', acc_sum)
+        print('acc_sum.shape: ', acc_sum.shape)
     return acc_sum / n
 
 
@@ -56,15 +58,8 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
             optimizer.zero_grad()
             l.backward()
             optimizer.step()
-
             train_l_sum += l.cpu().item()
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
-            if i < 2:
-
-                print('y_hat.shape: ', y_hat.shape)
-                print('y_hat.argmax(dim=1): ', y_hat.argmax(dim=1).shape)
-                i += 1
-
             n += y.shape[0]
             batch_count += 1
         test_acc = evaluate_accuracy(test_iter, net)
