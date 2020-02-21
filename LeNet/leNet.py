@@ -62,8 +62,8 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
             n += y.shape[0]
             batch_count += 1
         test_acc = evaluate_accuracy(test_iter, net)
-        print('epoch %d, loss %.4f, traiin acc %.3f, test acc %.3f, time %.1f sec' %
-              (epoch + 1), train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start)
+        print('epoch %d, loss %.4f, train acc %.3f, test acc %.3f, time %.1f sec' %
+              (epoch + 1, train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start))
 
 
 class LeNet(nn.Module):
