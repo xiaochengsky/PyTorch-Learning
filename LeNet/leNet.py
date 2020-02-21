@@ -4,7 +4,9 @@ from torchvision import transforms
 import time
 from torch import nn, optim
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+import logger
+
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # 下载数据集 FashionMNIST 数据集
 # mnist_train = torchvision.datasets.FashionMNIST(root='/mnt_datas/ycc/dataset/FashionMNIST', train=True, download=True, transform=transforms.ToTensor())
@@ -38,7 +40,10 @@ class LeNet(nn.Module):
         return output
 
 
+log = logger.log_init()
 net = LeNet()
 # 查看网络各层大小
-print(net)
+log.info(net)
+
+
 
