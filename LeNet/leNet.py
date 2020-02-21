@@ -6,7 +6,8 @@ from torch import nn, optim
 import logger
 import sys
 
-device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 
 def load_data_fashion_mnist(batch_size, resize=None, root='/mnt_datas/ycc/dataset/FashionMNIST'):
     """Download the fashion mnist dataset and then load into memory."""
@@ -37,8 +38,6 @@ def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.i
         # 改为训练模式
         net.train()
         n += y.shape[0]
-        print('acc_sum: ', acc_sum)
-        print('acc_sum.shape: ', acc_sum.shape)
     return acc_sum / n
 
 
@@ -93,11 +92,10 @@ class LeNet(nn.Module):
         return output
 
 
-log = logger.log_init()
+# log = logger.log_init()
 net = LeNet()
 # 查看网络各层大小
-log.info(net)
-
+print(net)
 
 # 获取数据和训练数据
 batch_size = 256
@@ -105,5 +103,3 @@ train_iter, test_iter = load_data_fashion_mnist(batch_size=batch_size)
 lr, num_epochs = 0.001, 5
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
-
-
