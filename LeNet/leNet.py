@@ -61,9 +61,9 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
             train_l_sum += l.cpu().item()
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
             if i < 2:
-                print('y_hat: ' + y_hat)
-                print('y_hat.shape: ' + y_hat.shape)
-                print('y_hat.argmax(dim=1): ' + y_hat.argmax(dim=1))
+                print('y_hat: ', y_hat)
+                print('y_hat.shape: ', y_hat.shape)
+                print('y_hat.argmax(dim=1): ', y_hat.argmax(dim=1))
                 i += 1
 
             n += y.shape[0]
