@@ -58,7 +58,7 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
             l.backward()
             optimizer.step()
             if i == 1:
-                logger('loss: ' + loss)
+                logger('loss: ' + loss.__str__())
 
             train_l_sum += l.cpu().item()
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
