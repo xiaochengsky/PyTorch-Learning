@@ -9,6 +9,7 @@ import sys
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
+# 加载 FashionMNIST 数据集
 def load_data_fashion_mnist(batch_size, resize=None, root='/mnt_datas/ycc/dataset/FashionMNIST'):
     """Download the fashion mnist dataset and then load into memory."""
     trans = []
@@ -29,6 +30,7 @@ def load_data_fashion_mnist(batch_size, resize=None, root='/mnt_datas/ycc/datase
     return train_iter, test_iter
 
 
+# 验证当前网络在测试集的精确度
 def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')):
     acc_sum, n = 0.0, 0
     for X, y in data_iter:
@@ -41,6 +43,7 @@ def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.i
     return acc_sum / n
 
 
+# LeNet网络
 def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
     net = net.to(device)
     print("training on", device)
@@ -66,6 +69,7 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
               (epoch + 1, train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start))
 
 
+# LeNet网络定义
 class LeNet(nn.Module):
     def __init__(self):
         super(LeNet, self).__init__()
@@ -97,9 +101,13 @@ net = LeNet()
 # 查看网络各层大小
 print(net)
 
-# 获取数据和训练数据
+# 设置批量大小
 batch_size = 256
+
+# 获取数据和训练数据
 train_iter, test_iter = load_data_fashion_mnist(batch_size=batch_size)
 lr, num_epochs = 0.001, 5
+
+# 定义优化器
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
