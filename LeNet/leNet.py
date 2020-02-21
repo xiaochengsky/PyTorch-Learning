@@ -6,7 +6,6 @@ from torch import nn, optim
 import logger
 import sys
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 # 加载 FashionMNIST 数据集
@@ -100,6 +99,8 @@ class LeNet(nn.Module):
 net = LeNet()
 # 查看网络各层大小
 print(net)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # 设置批量大小
 batch_size = 256
