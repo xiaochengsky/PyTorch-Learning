@@ -104,6 +104,7 @@ net = AlexNet()
 print(net)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 batch_size = 128
 train_iter, test_iter = load_data_fashion_mnist(batch_size=batch_size, resize=224)
 lr, num_epochs = 0.001, 5
