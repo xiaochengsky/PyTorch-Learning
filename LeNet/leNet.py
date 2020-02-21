@@ -4,6 +4,7 @@ from torchvision import transforms
 import time
 from torch import nn, optim
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # 下载数据集 FashionMNIST 数据集
 # mnist_train = torchvision.datasets.FashionMNIST(root='/mnt_datas/ycc/dataset/FashionMNIST', train=True, download=True, transform=transforms.ToTensor())
@@ -22,7 +23,7 @@ class LeNet(nn.Module):
             nn.Conv2d(6, 16, 5),
             nn.Sigmoid(),
             nn.MaxPool2d(2, 2)
-        ),
+        )
         self.fc = nn.Sequential(
             nn.Linear(16 * 4 * 4, 120),
             nn.Sigmoid(),
