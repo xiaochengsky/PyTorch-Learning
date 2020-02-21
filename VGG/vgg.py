@@ -32,7 +32,7 @@ def vgg(conv_arch, fc_features, fc_hidden_uints=4096):
     net = nn.Sequential()
     for i, (num_convs, in_channels, out_channels) in enumerate(conv_arch):
         net.add_module("vgg_block_" + str(i + 1), vgg_block(num_convs, in_channels, out_channels))
-    net.add_module("fc", nn.Sequential(FlattenLayer(),
+    net.add_module("fc", nn.Sequential(
                                        nn.Linear(fc_features, fc_hidden_uints), nn.ReLU(), nn.Dropout(0.5),
                                        nn.Linear(fc_hidden_uints, fc_hidden_uints), nn.ReLU(), nn.Dropout(0.5),
                                        nn.Linear(fc_hidden_uints, 10)
