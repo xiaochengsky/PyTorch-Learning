@@ -42,7 +42,7 @@ def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.i
 
 
 # AlexNet网络
-def train_alexNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
+def train_VGGNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
     net = net.to(device)
     print("training on", device)
     loss = torch.nn.CrossEntropyLoss()
@@ -126,4 +126,4 @@ batch_size = 64
 train_iter, test_iter = load_data_fashion_mnist(batch_size, resize=224)
 lr, num_epochs = 0.001, 5
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
-train_iter(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
+train_VGGNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
