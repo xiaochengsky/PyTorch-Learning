@@ -30,14 +30,13 @@ def load_data_fashion_mnist(batch_size, resize=None, root='/mnt_datas/ycc/datase
 
 def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')):
     acc_sum, n = 0.0, 0
-    with torch.no_grad:
-        for X, y in data_iter:
-            # 验证模式, 放弃 dropOut
-            net.eval()
-            acc_sum += (net(X.to(device)).argmax(dim=1) == y.to(device)).float().sum().cpu.item()
-            # 改为训练模式
-            net.train()
-            n += y.shape[0]
+    for X, y in data_iter:
+        # 验证模式, 放弃 dropOut
+        net.eval()
+        acc_sum += (net(X.to(device)).argmax(dim=1) == y.to(device)).float().sum().cpu.item()
+        # 改为训练模式
+        net.train()
+        n += y.shape[0]
     return acc_sum / n
 
 
@@ -61,9 +60,9 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
             train_l_sum += l.cpu().item()
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
             if i < 2:
-                print('y_hat: ', y_hat)
+
                 print('y_hat.shape: ', y_hat.shape)
-                print('y_hat.argmax(dim=1): ', y_hat.argmax(dim=1))
+                print('y_hat.argmax(dim=1): ', y_hat.argmax(dim=1).shape)
                 i += 1
 
             n += y.shape[0]
