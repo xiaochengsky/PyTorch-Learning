@@ -57,15 +57,15 @@ def train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_e
             optimizer.zero_grad()
             l.backward()
             optimizer.step()
-            if i == 1:
-                logger('loss: ' + loss.__str__())
 
             train_l_sum += l.cpu().item()
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
-            if i == 1:
+            if i < 2:
                 logger('y_hat: ' + y_hat)
                 logger('y_hat.shape: ' + y_hat.shape)
                 logger('y_hat.argmax(dim=1): ' + y_hat.argmax(dim=1))
+                i += 1
+
             n += y.shape[0]
             batch_count += 1
         test_acc = evaluate_accuracy(test_iter, net)
