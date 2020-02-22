@@ -98,7 +98,7 @@ class Residual(nn.Module):
         self.bn2 = nn.BatchNorm2d(out_channels)
 
     def forward(self, X):
-        Y = F.relu(self.bn1(self.conv1))
+        Y = F.relu(self.bn1(self.conv1(X)))
         Y = self.bn2(self.conv2(Y))
         # 如果需要改变通道数, 就需用 1x1 的卷积来改变输入的通道数, 再做相加运算
         if self.conv3:
@@ -107,9 +107,10 @@ class Residual(nn.Module):
 
 blk = Residual(3, 3)
 X = torch.rand(4, 3, 6, 6)
-blk(X).shape
+print(blk(X).shape)
 
 blk = Residual(3, 6, use_1x1conv=True)
+print(blk(X).shape)
 blk(X).shape
 
 print(blk(X))
