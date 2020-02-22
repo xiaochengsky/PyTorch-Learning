@@ -3,7 +3,6 @@ import torchvision
 from torchvision import transforms
 import time
 from torch import nn, optim
-import logger
 import sys
 
 
