@@ -135,10 +135,17 @@ net.add_module("fc", nn.Sequential(FlattenLayer(), nn.Linear(512, 10)))
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 batch_size = 256
 train_iter, test_iter = load_data_fashion_mnist(batch_size, resize=96)
-lr, num_epochs = 0.001, 5
+lr, num_epochs = 0.0005, 10
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 train_ResNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
 
+
+# output
+# epoch 1, loss 0.4064, train acc 0.851, test acc 0.892, time 30.8 sec
+# epoch 2, loss 0.1239, train acc 0.908, test acc 0.905, time 30.9 sec
+# epoch 3, loss 0.0699, train acc 0.922, test acc 0.915, time 31.2 sec
+# epoch 4, loss 0.0454, train acc 0.933, test acc 0.871, time 31.6 sec
+# epoch 5, loss 0.0312, train acc 0.942, test acc 0.922, time 31.8 sec
 
 
 
