@@ -141,11 +141,17 @@ train_ResNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epoc
 
 
 # output
-# epoch 1, loss 0.4064, train acc 0.851, test acc 0.892, time 30.8 sec
-# epoch 2, loss 0.1239, train acc 0.908, test acc 0.905, time 30.9 sec
-# epoch 3, loss 0.0699, train acc 0.922, test acc 0.915, time 31.2 sec
-# epoch 4, loss 0.0454, train acc 0.933, test acc 0.871, time 31.6 sec
-# epoch 5, loss 0.0312, train acc 0.942, test acc 0.922, time 31.8 sec
+# epoch 1, loss 0.3682, train acc 0.867, test acc 0.900, time 32.7 sec
+# epoch 2, loss 0.1161, train acc 0.915, test acc 0.901, time 31.6 sec
+# epoch 3, loss 0.0637, train acc 0.930, test acc 0.907, time 31.7 sec
+# epoch 4, loss 0.0409, train acc 0.940, test acc 0.916, time 31.8 sec
+# epoch 5, loss 0.0273, train acc 0.951, test acc 0.922, time 31.7 sec
+# epoch 6, loss 0.0199, train acc 0.956, test acc 0.924, time 31.8 sec
+# epoch 7, loss 0.0140, train acc 0.964, test acc 0.922, time 31.7 sec
+# epoch 8, loss 0.0093, train acc 0.973, test acc 0.915, time 31.9 sec
+# epoch 9, loss 0.0075, train acc 0.975, test acc 0.924, time 31.7 sec
+# epoch 10, loss 0.0052, train acc 0.981, test acc 0.925, time 31.7 sec
+
 
 
 
