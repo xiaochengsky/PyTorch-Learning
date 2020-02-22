@@ -74,17 +74,21 @@ class LeNet(nn.Module):
         super(LeNet, self).__init__()
         self.conv = nn.Sequential(
             nn.Conv2d(1, 6, 5),
+            nn.BatchNorm2d(6),
             nn.Sigmoid(),
             nn.MaxPool2d(2, 2),
 
             nn.Conv2d(6, 16, 5),
+            nn.BatchNorm2d(16),
             nn.Sigmoid(),
             nn.MaxPool2d(2, 2)
         )
         self.fc = nn.Sequential(
             nn.Linear(16 * 4 * 4, 120),
+            nn.BatchNorm2d(16 * 4 * 4),
             nn.Sigmoid(),
             nn.Linear(120, 84),
+            nn.BatchNorm2d(120),
             nn.Sigmoid(),
             nn.Linear(84, 10)
         )
