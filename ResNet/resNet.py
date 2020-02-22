@@ -128,7 +128,6 @@ net.add_module("resnet_block1", resnet_block(64, 64, 2, first_block=True))
 net.add_module("resnet_block2", resnet_block(64, 128, 2))
 net.add_module("resnet_block3", resnet_block(128, 256, 2))
 net.add_module("resnet_block4", resnet_block(256, 512, 2))
-
 net.add_module("global_avg_pool", GlobalAvgPool2d())   # output: (Batch, 512, 1, 1)
 net.add_module("fc", nn.Sequential(FlattenLayer(), nn.Linear(512, 10)))
 
