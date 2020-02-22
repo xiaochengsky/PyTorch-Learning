@@ -108,5 +108,9 @@ lr, num_epochs = 0.001, 5
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
 
-# 查看第一层的BN的 gamma 和 beta 参数
-print(net[1].gamma.view((-1, )), net[1].beta.view((-1, )))
+# output
+# epoch 1, loss 1.3512, train acc 0.762, test acc 0.800, time 2.0 sec
+# epoch 2, loss 0.3036, train acc 0.853, test acc 0.827, time 2.0 sec
+# epoch 3, loss 0.1414, train acc 0.871, test acc 0.864, time 2.0 sec
+# epoch 4, loss 0.0906, train acc 0.881, test acc 0.841, time 2.1 sec
+# epoch 5, loss 0.0664, train acc 0.887, test acc 0.874, time 2.0 sec
