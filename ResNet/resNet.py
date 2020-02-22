@@ -107,8 +107,10 @@ class Residual(nn.Module):
 
 blk = Residual(3, 3)
 X = torch.rand(4, 3, 6, 6)
-print(blk(X).shape)
+blk(X).shape
 
 blk = Residual(3, 6, use_1x1conv=True)
+blk(X).shape
+
 print(blk(X))
 
