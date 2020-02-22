@@ -67,10 +67,9 @@ b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
 
 b5 = nn.Sequential(Inception(832, 256, (160, 320), (32, 128), 128),
                    Inception(832, 384, (192, 384), (48, 128), 128),
-                   GlobalAvgPool2d(), nn.Linear(1024, 10))
+                   GlobalAvgPool2d())
 
-net = nn.Sequential(b1, b2, b3, b4, b5, FlattenLayer(),
-                    nn.Linear(1024, 10))
+net = nn.Sequential(b1, b2, b3, b4, b5, FlattenLayer(), nn.Linear(1024, 10))
 
 X = torch.rand(1, 1, 96, 96)
 for blk in net.children():
