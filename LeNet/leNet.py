@@ -6,7 +6,6 @@ from torch import nn, optim
 import sys
 
 
-
 # 加载 FashionMNIST 数据集
 def load_data_fashion_mnist(batch_size, resize=None, root='/mnt_datas/ycc/dataset/FashionMNIST'):
     """Download the fashion mnist dataset and then load into memory."""
@@ -111,3 +110,11 @@ lr, num_epochs = 0.001, 5
 # 定义优化器
 optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 train_leNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
+
+
+# output
+# epoch 1, loss 1.8040, train acc 0.336, test acc 0.585, time 1.9 sec
+# epoch 2, loss 0.4632, train acc 0.651, test acc 0.705, time 1.9 sec
+# epoch 3, loss 0.2489, train acc 0.722, test acc 0.731, time 1.9 sec
+# epoch 4, loss 0.1661, train acc 0.745, test acc 0.749, time 1.8 sec
+# epoch 5, loss 0.1221, train acc 0.762, test acc 0.763, time 1.9 sec
