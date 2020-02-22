@@ -91,21 +91,16 @@ class Inception(nn.Module):
         super(Inception, self).__init__()
         # line1
         self.p1_1 = nn.Conv2d(in_c, c1, kernel_size=1)
-        self.p1_1 = nn.BatchNorm2d(c1)
+
         # line2
         self.p2_1 = nn.Conv2d(in_c, c2[0], kernel_size=1)
-        self.p2_1 = nn.BatchNorm2d(c2[0])
         self.p2_2 = nn.Conv2d(c2[0], c2[1], kernel_size=3, padding=1)
-        self.p2_2 = nn.BatchNorm2d(c2[1])
         # line3
         self.p3_1 = nn.Conv2d(in_c, c3[0], kernel_size=1)
-        self.p3_1 = nn.BatchNorm2d(c3[0])
         self.p3_2 = nn.Conv2d(c3[0], c3[1], kernel_size=5, padding=2)
-        self.p3_2 = nn.BatchNorm2d(c3[1])
         # line4
         self.p4_1 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
         self.p4_2 = nn.Conv2d(in_c, c4, kernel_size=1)
-        self.p4_2 = nn.BatchNorm2d(c4)
 
     def forward(self, x):
         p1 = F.relu(self.p1_1(x))
