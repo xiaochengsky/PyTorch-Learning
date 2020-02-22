@@ -59,7 +59,7 @@ def evaluate_accuracy(data_iter, net, device=torch.device('cuda' if torch.cuda.i
 
 
 # AlexNet网络
-def train_GoogLeNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
+def train_ResNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
     net = net.to(device)
     print("training on", device)
     loss = torch.nn.CrossEntropyLoss()
@@ -105,13 +105,43 @@ class Residual(nn.Module):
             X = self.conv3(X)
         return F.relu(Y + X)
 
-blk = Residual(3, 3)
-X = torch.rand(4, 3, 6, 6)
-print(blk(X).shape)
 
-blk = Residual(3, 6, use_1x1conv=True)
-print(blk(X).shape)
-blk(X).shape
+def resnet_block(in_channels, out_channels, num_residuals, first_block=False):
+    if first_block:
+        assert in_channels == out_channels
+    blk = []
+    for i in range(num_residuals):
+        if i == 0 and not first_block:
+            blk.append(Residual(in_channels, out_channels, use_1x1conv=True, stride=2))
+        else:
+            blk.append(Residual(out_channels, out_channels))
+    return nn.Sequential(*blk)
 
-print(blk(X))
+
+net = nn.Sequential(
+    nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
+    nn.BatchNorm2d(64),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
+
+net.add_module("resnet_block1", resnet_block(64, 64, 2, first_block=True))
+net.add_module("resnet_block2", resnet_block(64, 128, 2))
+net.add_module("resnet_block3", resnet_block(128, 256, 2))
+net.add_module("resnet_block4", resnet_block(256, 512, 2))
+
+net.add_module("global_avg_pool", GlobalAvgPool2d())   # output: (Batch, 512, 1, 1)
+net.add_module("fc", nn.Sequential(FlattenLayer(), nn.Linear(512, 10)))
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+batch_size = 256
+train_iter, test_iter = load_data_fashion_mnist(batch_size, resize=96)
+lr, num_epochs = 0.001, 5
+optimizer = torch.optim.Adam(net.parameters(), lr=lr)
+train_ResNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
+
+
+
+
+
+
 
