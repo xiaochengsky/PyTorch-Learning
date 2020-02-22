@@ -43,7 +43,7 @@ class Inception(nn.Module):
         p2 = F.relu(self.p2_2(F.relu(self.p2_1(x))))
         p3 = F.relu(self.p3_2(F.relu(self.p3_1(x))))
         p4 = F.relu(self.p4_2(self.p4_1(x)))
-        return torch.cat((p1, p2, p3, p4), dim=1)
+        return torch.cat(p1, p2, p3, p4, dim=1)
 
 
 b1 = nn.Sequential(nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
