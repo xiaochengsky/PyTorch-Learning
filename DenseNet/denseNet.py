@@ -157,4 +157,11 @@ optimizer = torch.optim.Adam(net.parameters(), lr=lr)
 train_DenseNet(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)
 
 
+# output
+# epoch 1, loss 0.5123, train acc 0.837, test acc 0.861, time 22.8 sec
+# epoch 2, loss 0.1389, train acc 0.899, test acc 0.890, time 22.9 sec
+# epoch 3, loss 0.0811, train acc 0.912, test acc 0.907, time 22.9 sec
+# epoch 4, loss 0.0535, train acc 0.921, test acc 0.901, time 22.9 sec
+# epoch 5, loss 0.0396, train acc 0.927, test acc 0.896, time 23.0 sec
+
 
