@@ -14,14 +14,12 @@ class FlattenLayer(nn.Module):
         return x.view(x.shape[0], -1)
 
 
-class GlobalMaxPool1d(nn.Module):
+class GlobalAvgPool2d(nn.Module):
+    # 全局平均池化层可通过将池化窗口形状设置成输入的高和宽实现
     def __init__(self):
-        super(GlobalMaxPool1d, self).__init__()
-
+        super(GlobalAvgPool2d, self).__init__()
     def forward(self, x):
-        # x shape: (batch_size, channel, seq_len)
-        # return shape: (batch_size, channel, 1)
-        return F.max_pool1d(x, kernel_size=x.shape[2])
+        return F.avg_pool2d(x, kernel_size=x.size()[2:])
 
 
 class Inception(nn.Module):
@@ -69,7 +67,7 @@ b4 = nn.Sequential(Inception(480, 192, (96, 208), (16, 48), 64),
 
 b5 = nn.Sequential(Inception(832, 256, (160, 320), (32, 128), 128),
                    Inception(832, 384, (192, 384), (48, 128), 128),
-                   GlobalMaxPool1d(), nn.Linear(1024, 10))
+                   GlobalAvgPool2d(), nn.Linear(1024, 10))
 
 net = nn.Sequential(b1, b2, b3, b4, b5, FlattenLayer(),
                     nn.Linear(1024, 10))
